@@ -184,6 +184,7 @@ namespace App\Test;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\SapphireTest;
+use App\Models\ModelUnderTest;
 
 class MyTest extends SapphireTest
 {
@@ -191,19 +192,19 @@ class MyTest extends SapphireTest
     {
         parent::setUpBeforeClass();
         //this will remain for the whole suite and be removed for any other tests
-        Config::inst()->update('ClassName', 'var_name', 'var_value');
+        ModelUnderTest::config()->set('var_name', 'var_value');
     }
 
     public function testFeatureDoesAsExpected()
     {
         //this will be reset to 'var_value' at the end of this test function
-        Config::inst()->update('ClassName', 'var_name', 'new_var_value');
+        ModelUnderTest::config()->set('var_name', 'new_var_value');
     }
 
     public function testAnotherFeatureDoesAsExpected()
     {
         // this will be 'var_value'
-        Config::inst()->get('ClassName', 'var_name');
+        ModelUnderTest::config()->get('var_name');
     }
 }
 ```
